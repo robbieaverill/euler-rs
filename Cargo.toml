@@ -1,6 +1,0 @@
-[package]
-name = "robbieaverill_rusteuler"
-version = "0.1.0"
-authors = ["Robbie Averill <robbie@averill.co.nz>"]
-
-[dependencies]
