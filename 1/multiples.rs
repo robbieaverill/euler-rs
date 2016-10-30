@@ -4,13 +4,10 @@
 // Find the sum of all the multiples of 3 or 5 below 1000.
 
 fn calculate(boundary: i32) {
-    // Initialize a result vector containing multiples of 3 or 5
-    let mut results = Vec::new();
     let mut sum: i32 = 0;
 
     for i in 1..boundary {
         if i % 3 == 0 || i % 5 == 0 {
-            results.push(i);
             sum += i;
         }
     }
