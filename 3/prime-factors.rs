@@ -2,7 +2,10 @@
 //
 // What is the largest prime factor of the number 600851475143?
 
-fn get_primes(boundary: i32) -> Vec<i32> {
+/**
+ * Returns the prime numbers lower than the given boundary
+ */
+fn get_primes(boundary: i64) -> Vec<i64> {
     let mut result = Vec::new();
 
     for i in 2..boundary {
@@ -30,11 +33,36 @@ fn get_primes(boundary: i32) -> Vec<i32> {
     return result;
 }
 
-// fn get_prime_factors() {
-//
-// }
+/**
+ * Returns the prime factors for a given number as a vector
+ */
+fn get_prime_factors(number: i64) -> Vec<i64> {
+    let prime_numbers = get_primes(number);
+    let mut result = Vec::new();
 
+    for i in 0..prime_numbers.len() {
+        if number % prime_numbers[i] == 0 {
+            // Found a prime factor
+            result.push(prime_numbers[i]);
+        }
+    }
+
+    return result
+}
+
+/**
+ * Gets the highest prime factor for a given number.
+ *
+ * NOTE: This was more of an exercise than anything. It has INCREDIBLY poor performance, and is
+ * processing far more numbers than it needs to. For example - you could easily square root the
+ * number to get a starting point for the highest prime factor. Nothing higher than the sqrt would
+ * be a prime factor. Thoughts for next time...
+ */
 fn main () {
-    let primes = get_primes(15);
-    println!("Prime numbers below 15: {:?}", primes)
+    let number: i64 = 600851475143;
+    let factors = get_prime_factors(number);
+    println!("Input: {}", number);
+    println!("Result: {:?}", factors);
+
+    println!("Largest prime factor is {:?}", factors[factors.len() - 1])
 }
