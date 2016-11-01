@@ -3,66 +3,62 @@
 // What is the largest prime factor of the number 600851475143?
 
 /**
- * Returns the prime numbers lower than the given boundary
+ * Checks if `number` is a prime number
  */
-fn get_primes(boundary: i64) -> Vec<i64> {
-    let mut result = Vec::new();
-
-    for i in 2..boundary {
-        // Innocent until proven guilty!
-        let mut is_prime = true;
-
-        if i % 2 == 0 {
-            // Skip even numbers.
-            continue;
-        }
-
-        for n in 2..boundary {
-            if i % n == 0 && i != n {
-                // It's not a prime - i can be divided evenly into n parts (or it's just even)
-                is_prime = false;
-            }
-        }
-
-        // It's a prime number. Has no common divisors other than 1 and itself
-        if is_prime {
-            result.push(i);
-        }
+fn is_prime_number(number: i64) -> bool {
+    if number <= 1 {
+        return false;
+    } else if number <= 3 {
+        return true;
+    } else if number % 2 == 0 || number % 3 == 0 {
+        return false;
     }
 
-    return result;
+    let mut i = 5;
+    while i * i <= number {
+        if number % i == 0 || number % (number + 2) == 0 {
+            return false;
+        }
+        i += 6;
+    }
+    return true
 }
 
 /**
- * Returns the prime factors for a given number as a vector
+ * Checks whether `factor` is a factor of `factor_of`
  */
-fn get_prime_factors(number: i64) -> Vec<i64> {
-    let prime_numbers = get_primes(number);
-    let mut result = Vec::new();
+fn is_factor_of(factor: i64, factor_of: i64) -> bool {
+    factor_of % factor == 0
+}
 
-    for i in 0..prime_numbers.len() {
-        if number % prime_numbers[i] == 0 {
-            // Found a prime factor
-            result.push(prime_numbers[i]);
+/**
+ * Returns the highest prime factor for `number`
+ */
+fn highest_prime_factor(number: i64) -> i64 {
+    for i in (2..number).rev() {
+        if is_factor_of(i, number) && is_prime_number(i) {
+            return i;
         }
     }
-
-    return result
+    return 2;
 }
 
 /**
  * Gets the highest prime factor for a given number.
  *
- * NOTE: This was more of an exercise than anything. It has INCREDIBLY poor performance, and is
- * processing far more numbers than it needs to. For example - you could easily square root the
- * number to get a starting point for the highest prime factor. Nothing higher than the sqrt would
- * be a prime factor. Thoughts for next time...
+ * NOTE: This was more of an exercise than anything. It should not be considered as efficient.
  */
 fn main () {
+    // println!("1: {:?}", is_prime_number(1));
+    // println!("2: {:?}", is_prime_number(2));
+    // println!("3: {:?}", is_prime_number(3));
+    // println!("4: {:?}", is_prime_number(4));
+    // println!("5: {:?}", is_prime_number(5));
+    // println!("6: {:?}", is_prime_number(6));
+    // println!("7: {:?}", is_prime_number(7))
     let number: i64 = 600851475143;
-    let factors = get_prime_factors(number);
     println!("Input: {}", number);
-    println!("Result: {:?}", factors);
 
-    println!("Largest prime factor is {:?}", factors[factors.len() - 1])
+    let highest_prime_factor = highest_prime_factor(number);
+    println!("Highest prime of {} is {}", number, highest_prime_factor)
 }
