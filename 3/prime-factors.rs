@@ -3,9 +3,16 @@
 // What is the largest prime factor of the number 600851475143?
 
 /**
- * Checks if `number` is a prime number
+ * Checks whether `factor` is a factor of `factor_of`
  */
-fn is_prime_number(number: i64) -> bool {
+fn is_factor_of(factor: i64, factor_of: i64) -> bool {
+    factor_of % factor == 0
+}
+
+/**
+ * Checks if `number` is a prime number (borrowed from #3)
+ */
+pub fn is_prime_number(number: i64) -> bool {
     if number <= 1 {
         return false;
     } else if number <= 3 {
@@ -14,9 +21,9 @@ fn is_prime_number(number: i64) -> bool {
         return false;
     }
 
-    let mut i = 5;
+    let mut i: i64 = 5;
     while i * i <= number {
-        if number % i == 0 || number % (number + 2) == 0 {
+        if number % i == 0 || number % (i + 2) == 0 {
             return false;
         }
         i += 6;
@@ -25,19 +32,12 @@ fn is_prime_number(number: i64) -> bool {
 }
 
 /**
- * Checks whether `factor` is a factor of `factor_of`
- */
-fn is_factor_of(factor: i64, factor_of: i64) -> bool {
-    factor_of % factor == 0
-}
-
-/**
  * Returns the highest prime factor for `number`
  */
 fn highest_prime_factor(number: i64) -> i64 {
     let start = (number as f64).sqrt() as i64;
     for i in (2..start).rev() {
-        if is_factor_of(i, number) && is_prime_number(i) {
+        if is_factor_of(i, number) && calculate_prime::is_prime_number(i) {
             return i;
         }
     }
