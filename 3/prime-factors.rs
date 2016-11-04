@@ -35,7 +35,8 @@ fn is_factor_of(factor: i64, factor_of: i64) -> bool {
  * Returns the highest prime factor for `number`
  */
 fn highest_prime_factor(number: i64) -> i64 {
-    for i in (2..number).rev() {
+    let start = (number as f64).sqrt() as i64;
+    for i in (2..start).rev() {
         if is_factor_of(i, number) && is_prime_number(i) {
             return i;
         }
@@ -49,13 +50,6 @@ fn highest_prime_factor(number: i64) -> i64 {
  * NOTE: This was more of an exercise than anything. It should not be considered as efficient.
  */
 fn main () {
-    // println!("1: {:?}", is_prime_number(1));
-    // println!("2: {:?}", is_prime_number(2));
-    // println!("3: {:?}", is_prime_number(3));
-    // println!("4: {:?}", is_prime_number(4));
-    // println!("5: {:?}", is_prime_number(5));
-    // println!("6: {:?}", is_prime_number(6));
-    // println!("7: {:?}", is_prime_number(7))
     let number: i64 = 600851475143;
     println!("Input: {}", number);
 
