@@ -11,3 +11,8 @@ A collection of [Project Euler](https://projecteuler.net) challenges solved with
 5. Get the smallest number that is evenly divisible by 1 through 20
 6. Find the difference between the sum of numbers squared and the sum of squared numbers
 7. Find the nth prime number (as argument)
+8. Find the largest product in a series
+
+## Related
+
+* [`robbieaverill/exercism-rs`](https://github.com/robbieaverill/exercism-rs)
